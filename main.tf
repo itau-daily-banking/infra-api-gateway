@@ -2,20 +2,17 @@ provider "aws" {
   region = "us-east-1"
 }
 
-# 🎯 Definição da API Gateway
 resource "aws_api_gateway_rest_api" "api" {
   name        = "DailyBankingCase"
   description = "API Gateway para gerenciar o cancelamento do débito automático."
 }
 
-# 🏗️ Criação do recurso /debito
 resource "aws_api_gateway_resource" "debito_v1" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   parent_id   = aws_api_gateway_rest_api.api.root_resource_id
   path_part   = "debito"
 }
 
-# 🏗️ Criação do recurso /debito/v1
 resource "aws_api_gateway_resource" "v1" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   parent_id   = aws_api_gateway_resource.debito_v1.id
@@ -23,10 +20,10 @@ resource "aws_api_gateway_resource" "v1" {
 }
 
 module "cancelamento" {
-  source       = "./cancelamento" # Pasta onde estará seu módulo cancelamento
-  rest_api_id  = aws_api_gateway_rest_api.api.id
-  parent_id    = aws_api_gateway_resource.v1.id
-  exec_arn     = aws_api_gateway_rest_api.api.execution_arn
+  source      = "./cancelamento" # Pasta onde estará seu módulo cancelamento
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  parent_id   = aws_api_gateway_resource.v1.id
+  exec_arn    = aws_api_gateway_rest_api.api.execution_arn
 }
 
 resource "aws_api_gateway_deployment" "deployment" {
