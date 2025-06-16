@@ -15,7 +15,6 @@ jobs:
 
     env:
       AWS_REGION: ${{ secrets.AWS_REGION }}
-      EKS_CLUSTER_NAME: dailybanking-case
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
 
     steps:
@@ -41,7 +40,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Save Plan
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: tfplan
           path: tfplan
