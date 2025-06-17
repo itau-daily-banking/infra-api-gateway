@@ -18,5 +18,5 @@ variable "s3_backend_key" {
 variable "url_base" {
   description = "url base aplicaçao eks"
   type        = string
-  default     = "http://k8s-default-ingressa-0faf251d7e-1124737897.sa-east-1.elb.amazonaws.com/debito/v1"
+  default     = "http://k8s-default-ingressd-d7e6531aa6-744753452.us-east-1.elb.amazonaws.com/api/v1/cancelamentos"
 }
